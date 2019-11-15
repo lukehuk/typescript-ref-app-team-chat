@@ -21,12 +21,12 @@ const GlobalStyles = createGlobalStyle`
       }
     
     :root {
-      --accent-color-1: #cf2128;
-      --accent-color-2: #cf2128;
-      --accent-color-3: #979797;
+      --accent-color-1: #ff8833;
+      --accent-color-2: #ff8833;
+      --accent-color-3: #02b9c1;
       --accent-color-4: #979797;
       --accent-color-5: #f0f3f7;
-      --logo-content: url('/company_logo.png')
+      --logo-content: url('/company_logo.svg')
     }
 `;
 

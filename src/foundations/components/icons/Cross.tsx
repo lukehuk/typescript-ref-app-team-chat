@@ -6,7 +6,7 @@ const Cross = (
   <svg width={16} height={16} {...props}>
     <title>{"iconClose"}</title>
     <g
-      stroke="#979797"
+      stroke="var(--accent-color-4)"
       strokeWidth={2}
       fill="none"
       fillRule="evenodd"

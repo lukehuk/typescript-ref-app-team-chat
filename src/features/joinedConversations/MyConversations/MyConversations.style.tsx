@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ConversationList = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 `;

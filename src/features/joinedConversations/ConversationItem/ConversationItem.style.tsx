@@ -11,9 +11,11 @@ export const Wrapper = styled.div<{ selected: boolean; emphasized: boolean }>`
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  background-color: ${props => (props.selected ? "#6FA9F6" : "white")};
+  background-color: ${props =>
+    props.selected ? "var(--accent-color-1)" : "white"};
   :hover {
-    background-color: ${props => (props.selected ? "#6FA9F6" : "#f0f3f7")};
+    background-color: ${props =>
+      props.selected ? "var(--accent-color-1)" : "var(--accent-color-5)"};
   }
 `;
 
@@ -48,5 +50,6 @@ export const ConversationIcon = styled.div<{ selected: boolean }>`
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 13px;
-  background-color: ${props => (props.selected ? "#6B9EEA" : "#f0f3f7")};
+  background-color: ${props =>
+    props.selected ? "var(--accent-color-3)" : "var(--accent-color-5)"};
 `;

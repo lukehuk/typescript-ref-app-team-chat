@@ -48,7 +48,7 @@ const ConversationItem = ({
             onLeave();
           }}
         >
-          <Leave fill={selected ? "white" : "#979797"} />
+          <Leave fill={selected ? "white" : "var(--accent-color-2)"} />
         </IconWrapper>
       ) : (
         unreadMessageCount > 0 && (

@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   :hover {
-    background-color: #f0f3f7;
+    background-color: var(--accent-color-5);
   }
 `;
 

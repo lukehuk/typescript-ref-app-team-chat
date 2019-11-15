@@ -66,7 +66,13 @@ const ConversationOccupancy = () => {
         <em>{presentCount}</em> | {joinedCount}
       </OccupancyNumber>
       <IconWrapper>
-        <PeopleGroupIcon fill={isRightLayoutToggled ? "#3FABFF" : "#979797"} />
+        <PeopleGroupIcon
+          fill={
+            isRightLayoutToggled
+              ? "var(--accent-color-2)"
+              : "var(--accent-color-4)"
+          }
+        />
       </IconWrapper>
     </Wrapper>
   );

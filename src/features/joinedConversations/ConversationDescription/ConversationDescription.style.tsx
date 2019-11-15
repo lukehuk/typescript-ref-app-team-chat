@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   background-color: white;
   :hover {
-    background-color: #f0f3f7;
+    background-color: var(--accent-color-5);
   }
 `;
 
@@ -50,5 +50,5 @@ export const ConversationIcon = styled.div`
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 13px;
-  background-color: #f0f3f7;
+  background-color: var(--accent-color-5);
 `;

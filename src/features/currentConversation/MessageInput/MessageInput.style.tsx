@@ -15,7 +15,7 @@ export const Container = styled.div`
   height: auto;
   border-radius: 25px;
   display: flex;
-  border: 1px solid #979797;
+  border: 1px solid var(--accent-color-2);
   align-items: flex-end;
 `;
 
@@ -27,10 +27,10 @@ export const TextArea = styled.textarea`
   max-height: 150px;
   padding: 0;
   margin-left: 15px;
-  background-color: #f0f3f7;
+  background-color: var(--accent-color-5);
 
   &::placeholder {
-    color: #979797;
+    color: var(--accent-color-2);
   }
 
   &:focus {

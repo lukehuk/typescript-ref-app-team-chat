@@ -4,7 +4,7 @@ import { Breakpoint } from "features/layout/layoutModel";
 import { getPanelStates, getBreakpoint } from "features/layout/selectors";
 import { MyUserDetails } from "features/currentUser/MyUserDetails/MyUserDetails";
 import { MyConversations } from "features/joinedConversations/MyConversations/MyConversations";
-import { Wrapper, AnimatedWrapper } from "./Menu.style";
+import { Wrapper, AnimatedWrapper, Logo } from "./Menu.style";
 
 const Menu = () => {
   const panel = useRef<HTMLElement>(null);
@@ -14,6 +14,7 @@ const Menu = () => {
 
   return (
     <Panel ref={panel} pose={panels.Left ? "open" : "closed"}>
+      <Logo id="logo" alt="Company logo" />
       <MyUserDetails />
       <MyConversations />
     </Panel>

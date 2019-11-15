@@ -17,8 +17,8 @@ export const AnimatedWrapper = posed(Wrapper)({
   closed: { width: "24px", applyAtEnd: { display: "none" } }
 });
 
-export const Img = styled.img`
-  max-width: 100%;
-  align-self: flex-end;
-  margin-top: auto;
+export const Logo = styled.img`
+  width: 75%;
+  margin: 20px auto;
+  content: var(--logo-content);
 `;

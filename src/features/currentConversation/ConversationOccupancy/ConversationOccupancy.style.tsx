@@ -7,7 +7,8 @@ export const Wrapper = styled.div<{ highlighted: boolean }>`
   font-weight: 400;
   cursor: pointer;
   font-size: 13px;
-  color: ${props => (props.highlighted ? "#3FABFF" : "#979797")};
+  color: ${props =>
+    props.highlighted ? "var(--accent-color-2)" : "var(--accent-color-4)"};
   @media (max-width: 480px) {
     flex-direction: column-reverse;
     min-width: 50px;

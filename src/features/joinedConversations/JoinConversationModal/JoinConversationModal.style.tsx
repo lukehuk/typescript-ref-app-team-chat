@@ -2,7 +2,7 @@ import styled from "styled-components/macro";
 
 export const ScrollView = styled.section`
   text-align: left;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   > div {
     padding-bottom: 8px;

@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   flex-direction: column;
-  background-color: #f0f3f7;
+  background-color: var(--accent-color-5);
   justify-content: center;
 `;
 
@@ -26,7 +26,7 @@ export const Button = styled.button`
   color: white;
   border-radius: 32px;
   padding: 16px 0;
-  background: #5baefc;
+  background: var(--accent-color-1);
   border: none;
   &:focus {
     outline: none;

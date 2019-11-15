@@ -34,7 +34,9 @@ const EmojiInput = ({ value, onSelection }: EmojiInputProps) => {
   return (
     <div ref={picker}>
       <Dialog>
-        {showPicker && <Picker emoji="" title="" onSelect={addEmoji} />}
+        {showPicker && (
+          <Picker native={true} emoji="" title="" onSelect={addEmoji} />
+        )}
       </Dialog>
       <EmojiButton onClick={togglePicker}>
         <FunnyEmoji />

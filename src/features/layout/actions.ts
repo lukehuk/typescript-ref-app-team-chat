@@ -15,6 +15,10 @@ export function setLayoutOverlay() {
   return setLayout(Layout.Overlay);
 }
 
+export function setLayoutThemeOverlay() {
+  return setLayout(Layout.ThemeOverlay);
+}
+
 export function setLayoutRight() {
   return setLayout(Layout.Right);
 }

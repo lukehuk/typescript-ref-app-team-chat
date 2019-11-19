@@ -22,6 +22,7 @@ interface PanelStates {
   Left: boolean;
   Right: boolean;
   Overlay: boolean;
+  ThemeOverlay: boolean;
   Content: boolean;
   Top: boolean;
 }
@@ -36,6 +37,7 @@ export const getPanelStates = createSelector(
       Left: layout === Layout.Left || breakpoint !== Breakpoint.Small,
       Right: layout === Layout.Right,
       Overlay: layout === Layout.Overlay,
+      ThemeOverlay: layout === Layout.ThemeOverlay,
       Content:
         breakpoint !== Breakpoint.Small ? true : layout === Layout.Default,
       Top: true

@@ -22,3 +22,16 @@ export const Logo = styled.img`
   margin: 20px auto;
   content: var(--logo-content);
 `;
+
+export const BrushButton = styled.span`
+  cursor: pointer;
+  font-size: 0.75em;
+  align-self: center;
+  cursor: pointer;
+`;
+
+export const BrushContainer = styled.div`
+  bottom: 5px;
+  left: 5px;
+  position: absolute;
+`;

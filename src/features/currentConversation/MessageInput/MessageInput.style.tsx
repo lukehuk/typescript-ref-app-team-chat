@@ -36,7 +36,7 @@ export const TextArea = styled.textarea`
   &:focus {
     outline: none;
   }
-  font-size: 15px;
+  font-size: 14px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: #5a5a5a;

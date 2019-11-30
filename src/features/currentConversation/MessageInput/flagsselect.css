@@ -1,0 +1,15 @@
+.flag-select .flag-options {
+  bottom: 30px;
+  right: 0px;
+  max-height: 260px;
+}
+
+.flag-select {
+  position: absolute;
+  bottom: 6px;
+  right: 30px;
+}
+
+.flag-option img {
+  top: 0px;
+}

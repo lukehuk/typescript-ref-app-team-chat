@@ -25,6 +25,7 @@ export const TextArea = styled.textarea`
   resize: none;
   overflow: auto;
   max-height: 150px;
+  min-height: 17px;
   padding: 0;
   margin-left: 15px;
   background-color: var(--accent-color-5);

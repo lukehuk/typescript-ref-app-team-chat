@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { getPanelStates, getBreakpoint } from "features/layout/selectors";
+import { getBreakpoint, getPanelStates } from "features/layout/selectors";
 import { Breakpoint } from "features/layout/layoutModel";
-import { UsersIndexedById, getUsersById } from "features/users/userModel";
+import { getUsersById, UsersIndexedById } from "features/users/userModel";
 import {
   getUsersByConversationId,
   MembershipHash
 } from "../conversationMemberModel";
 import {
-  getPresenceByConversationId,
-  ConversationPresence
+  ConversationPresence,
+  getPresenceByConversationId
 } from "features/memberPresence/memberPresenceModel";
 import { MemberDescription, UserFragment } from "../MemberDescription";
 import { getCurrentConversationId } from "features/currentConversation/currentConversationModel";
@@ -18,15 +18,15 @@ import { setLayoutDefault } from "features/layout/actions";
 import { Cross as CrossIcon } from "foundations/components/icons/Cross";
 import { Back as BackIcon } from "foundations/components/icons/Back";
 import {
-  Wrapper,
   AnimatedWrapper,
-  CloseIcon,
-  ScrollableView,
-  Header,
   BackIconWrapper,
-  Title
+  CloseIcon,
+  Header,
+  ScrollableView,
+  Title,
+  Wrapper
 } from "./ConversationMembers.style";
-import { fetchMembers, fetchHereNow } from "pubnub-redux";
+import { fetchHereNow, fetchMembers } from "pubnub-redux";
 import { usePubNub } from "pubnub-react";
 
 export const getCurrentConversationMembers = createSelector(

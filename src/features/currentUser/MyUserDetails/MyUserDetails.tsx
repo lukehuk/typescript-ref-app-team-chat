@@ -5,11 +5,11 @@ import { getLoggedInUserId } from "features/authentication/authenticationModel";
 import { getUsersById } from "features/users/userModel";
 import { NetworkStatus } from "../NetworkStatus";
 import {
-  Wrapper,
-  Avatar,
   About,
+  Avatar,
   UserName,
-  UserTitle
+  UserTitle,
+  Wrapper
 } from "./MyUserDetails.style";
 
 export interface MyUserDetailsFragment {

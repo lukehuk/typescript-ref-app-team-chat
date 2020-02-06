@@ -1,17 +1,16 @@
 import React from "react";
-import { getPanelStates } from "features/layout/selectors";
-import { useSelector, useDispatch } from "react-redux";
+import { getBreakpoint, getPanelStates } from "features/layout/selectors";
+import { useDispatch, useSelector } from "react-redux";
 import { setLayoutDefault } from "features/layout/actions";
 import { Cross as CrossIcon } from "foundations/components/icons/Cross";
 import {
-  ScrollView,
   CloseButton,
-  Title,
-  Header
+  Header,
+  ScrollView,
+  Title
 } from "./ChangeThemeModal.style";
-import { Overlay, Modal, AnimatedModal } from "foundations/components/Modal";
+import { AnimatedModal, Modal, Overlay } from "foundations/components/Modal";
 import { Breakpoint } from "features/layout/layoutModel";
-import { getBreakpoint } from "features/layout/selectors";
 import ColorPicker from "./ColorPicker";
 import LogoPicker from "./LogoPicker";
 

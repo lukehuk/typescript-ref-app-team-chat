@@ -1,6 +1,6 @@
 import React from "react";
 import { ConversationOccupancy } from "../ConversationOccupancy";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { setLayoutLeft } from "features/layout/actions";
 import {
@@ -9,13 +9,13 @@ import {
 } from "features/conversations/conversationModel";
 import { getCurrentConversationId } from "../currentConversationModel";
 import {
-  Wrapper,
+  BackIconWrapper,
   Body,
+  Border,
+  Description,
   Information,
   Name,
-  Description,
-  Border,
-  BackIconWrapper
+  Wrapper
 } from "./Header.style";
 import { Back as BackIcon } from "foundations/components/icons/Back";
 

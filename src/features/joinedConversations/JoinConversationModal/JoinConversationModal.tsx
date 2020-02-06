@@ -1,6 +1,6 @@
 import React from "react";
-import { getPanelStates } from "features/layout/selectors";
-import { useSelector, useDispatch } from "react-redux";
+import { getBreakpoint, getPanelStates } from "features/layout/selectors";
+import { useDispatch, useSelector } from "react-redux";
 import { setLayoutDefault } from "features/layout/actions";
 import { getLoggedInUserId } from "features/authentication/authenticationModel";
 import {
@@ -13,19 +13,18 @@ import {
 } from "../joinedConversationModel";
 import { Cross as CrossIcon } from "foundations/components/icons/Cross";
 import {
-  ScrollView,
   CloseButton,
-  Title,
-  Header
+  Header,
+  ScrollView,
+  Title
 } from "./JoinConversationModal.style";
-import { Overlay, Modal, AnimatedModal } from "foundations/components/Modal";
+import { AnimatedModal, Modal, Overlay } from "foundations/components/Modal";
 import { createSelector } from "reselect";
 import {
-  getAllConversations,
-  Conversation
+  Conversation,
+  getAllConversations
 } from "features/conversations/conversationModel";
 import { Breakpoint } from "features/layout/layoutModel";
-import { getBreakpoint } from "features/layout/selectors";
 import { joinConversation } from "../joinConversationCommand";
 
 // Fetch all conversations and remove the ones we're already a member of

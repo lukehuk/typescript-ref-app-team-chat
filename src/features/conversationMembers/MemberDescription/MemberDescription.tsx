@@ -2,12 +2,12 @@ import React from "react";
 import { UserInitialsAvatar } from "foundations/components/UserInitialsAvatar";
 
 import {
-  Wrapper,
-  Avatar,
   About,
+  Avatar,
   PresenceDot,
   UserName,
-  UserTitle
+  UserTitle,
+  Wrapper
 } from "./MemberDescription.style";
 
 export interface UserFragment {

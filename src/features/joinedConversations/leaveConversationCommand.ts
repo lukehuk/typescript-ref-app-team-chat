@@ -1,8 +1,8 @@
 import { ThunkAction } from "main/storeTypes";
 import { leaveSpaces } from "pubnub-redux";
 import {
-  focusOnConversation,
-  DEFAULT_CONVERSATION
+  DEFAULT_CONVERSATION,
+  focusOnConversation
 } from "features/currentConversation/currentConversationModel";
 
 export const leaveConversation = (

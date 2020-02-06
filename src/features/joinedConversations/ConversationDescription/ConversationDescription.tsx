@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  Wrapper,
   Body,
+  Content,
   ConversationIcon,
-  Name,
   Description,
-  Content
+  Name,
+  Wrapper
 } from "./ConversationDescription.style";
 
 export interface ConversationDescriptionFragment {

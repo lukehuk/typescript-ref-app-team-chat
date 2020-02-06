@@ -1,4 +1,4 @@
-import { useEffect, useCallback, RefObject } from "react";
+import { RefObject, useCallback, useEffect } from "react";
 
 const isRefArray = (
   r: RefObject<any> | RefObject<any>[]

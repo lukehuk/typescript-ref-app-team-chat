@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { getCurrentConversationId } from "../currentConversationModel";
 import {
@@ -7,16 +7,16 @@ import {
   MembershipHash
 } from "features/conversationMembers/conversationMemberModel";
 import {
-  getPresenceByConversationId,
-  ConversationPresence
+  ConversationPresence,
+  getPresenceByConversationId
 } from "features/memberPresence/memberPresenceModel";
 import { getPanelStates } from "features/layout/selectors";
 import { setLayoutRight } from "features/layout/actions";
 import { PeopleGroup as PeopleGroupIcon } from "foundations/components/icons/PeopleGroup";
 import {
-  Wrapper,
+  IconWrapper,
   OccupancyNumber,
-  IconWrapper
+  Wrapper
 } from "./ConversationOccupancy.style";
 
 export interface ConversationOccupancyFragment {

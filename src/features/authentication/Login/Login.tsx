@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch } from "main/useDispatch";
 import {
-  Wrapper,
+  Body,
   Button,
-  PoweredByPubNub,
   PoweredBy,
-  Body
+  PoweredByPubNub,
+  Wrapper
 } from "./Login.style";
 import PubNubLogo from "./PubNub_Logo.svg";
 import { login } from "../loginCommand";

@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Breakpoint } from "features/layout/layoutModel";
-import { getPanelStates, getBreakpoint } from "features/layout/selectors";
+import { getBreakpoint, getPanelStates } from "features/layout/selectors";
 import { MyUserDetails } from "features/currentUser/MyUserDetails/MyUserDetails";
 import { MyConversations } from "features/joinedConversations/MyConversations/MyConversations";
 import {
-  Wrapper,
   AnimatedWrapper,
-  Logo,
   BrushButton,
-  BrushContainer
+  BrushContainer,
+  Logo,
+  Wrapper
 } from "./Menu.style";
 import { setLayoutThemeOverlay } from "features/layout/actions";
 import { Brush } from "foundations/components/icons/Brush";

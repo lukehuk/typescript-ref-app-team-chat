@@ -2,8 +2,8 @@ import { AppState } from "main/storeTypes";
 import { createSelector } from "reselect";
 import { combineReducers } from "redux";
 import {
-  createSpaceReducer,
   createSpaceListReducer,
+  createSpaceReducer,
   Space
 } from "pubnub-redux";
 

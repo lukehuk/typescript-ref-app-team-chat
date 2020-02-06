@@ -3,8 +3,8 @@ import {
   updateConversationMessageInputValueAction
 } from "features/currentConversation/currentConversationModel";
 import {
-  setLayoutAction,
-  setBreakpointAction
+  setBreakpointAction,
+  setLayoutAction
 } from "features/layout/layoutModel";
 import {
   logingInAction,

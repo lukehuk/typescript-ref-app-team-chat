@@ -20,12 +20,9 @@ export type Message = Required<
 
 const getMessagesSlice = (state: AppState) => state.messages;
 
-export const getMessagesById = createSelector(
-  [getMessagesSlice],
-  messages => {
-    return messages.byId;
-  }
-);
+export const getMessagesById = createSelector([getMessagesSlice], messages => {
+  return messages.byId;
+});
 
 const MessageStateReducer = createMessageReducer<Message>();
 export { MessageStateReducer };

@@ -1,12 +1,13 @@
 import "emoji-mart/css/emoji-mart.css";
-import React, { useState, useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import useClickOutside from "foundations/hooks/useClickOutside";
-import { Picker, EmojiData } from "emoji-mart";
+import { EmojiData, Picker } from "emoji-mart";
 import { FunnyEmoji } from "foundations/components/icons/FunnyEmoji";
 import { Dialog, EmojiButton } from "./EmojiInput.style";
 
 interface EmojiInputProps {
   value: string;
+
   onSelection(contentWithEmoji: string): any;
 }
 

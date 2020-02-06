@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { cleanup, render } from "@testing-library/react";
+import { cleanup } from "@testing-library/react";
 import App from "../App";
 
 import "@testing-library/jest-dom/extend-expect";

@@ -16,6 +16,7 @@ export type AppState = RootState;
  */
 export interface AppDispatch {
   <T extends AppActions>(action: T): T;
+
   <R>(anyThunk: ThunkAction<R>): R;
 }
 

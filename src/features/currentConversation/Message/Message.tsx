@@ -2,13 +2,13 @@ import React, { ReactNode } from "react";
 import { UserInitialsAvatar } from "foundations/components/UserInitialsAvatar";
 import convertTimestampToTime from "foundations/utilities/convertTimestampToTime";
 import {
-  Wrapper,
-  Body,
-  Header,
   Avatar,
-  SenderName,
+  Body,
   Content,
-  TimeSent
+  Header,
+  SenderName,
+  TimeSent,
+  Wrapper
 } from "./Message.style";
 
 export interface MessageFragment {

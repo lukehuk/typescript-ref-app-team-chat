@@ -1,25 +1,29 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { getCurrentConversationId } from "features/currentConversation/currentConversationModel";
-import { setLayoutOverlay, setLayoutDefault } from "features/layout/actions";
-import { getConversationsByUserId } from "../joinedConversationModel";
-import { MembershipHash } from "../joinedConversationModel";
+import {
+  focusOnConversation,
+  getCurrentConversationId
+} from "features/currentConversation/currentConversationModel";
+import { setLayoutDefault, setLayoutOverlay } from "features/layout/actions";
+import {
+  getConversationsByUserId,
+  MembershipHash
+} from "../joinedConversationModel";
 import {
   ConversationsIndexedById,
   getConversationsById
 } from "features/conversations/conversationModel";
-import { focusOnConversation } from "features/currentConversation/currentConversationModel";
 import { getLoggedInUserId } from "features/authentication/authenticationModel";
 import { Add } from "foundations/components/icons/Add";
 import { ConversationItem } from "../ConversationItem";
 import {
-  Wrapper,
-  Title,
   AddButton,
-  ConversationList
+  ConversationList,
+  Title,
+  Wrapper
 } from "./MyConversations.style";
-import { fetchSpaces, fetchMembers } from "pubnub-redux";
+import { fetchMembers, fetchSpaces } from "pubnub-redux";
 import { getCurrentConversationMembers } from "features/conversationMembers/ConversationMembers/ConversationMembers";
 import { UserFragment } from "features/conversationMembers/MemberDescription/MemberDescription";
 import { leaveConversation } from "../leaveConversationCommand";

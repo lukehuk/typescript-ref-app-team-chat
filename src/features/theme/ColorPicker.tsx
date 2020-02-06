@@ -1,5 +1,5 @@
-import React, { CSSProperties } from "react";
-import { SketchPicker, ColorResult, RGBColor } from "react-color";
+import React from "react";
+import { ColorResult, RGBColor, SketchPicker } from "react-color";
 
 interface IProps {
   propertyName: string;

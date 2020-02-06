@@ -27,7 +27,8 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
     "start": "node setup/populate.js --quick-test && react-scripts start",

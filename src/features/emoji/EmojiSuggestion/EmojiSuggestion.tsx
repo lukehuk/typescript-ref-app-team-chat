@@ -4,16 +4,16 @@ import { useSelector } from "react-redux";
 import { Breakpoint } from "features/layout/layoutModel";
 import React, { useRef } from "react";
 import useClickOutside from "foundations/hooks/useClickOutside";
-import { emojiIndex, EmojiData } from "emoji-mart";
+import { EmojiData, emojiIndex } from "emoji-mart";
 import {
-  Popup,
-  Suggestions,
-  Heading,
-  EmojiSearchTerm,
-  Results,
-  Result,
+  Colons,
   Emoji,
-  Colons
+  EmojiSearchTerm,
+  Heading,
+  Popup,
+  Result,
+  Results,
+  Suggestions
 } from "./EmojiSuggestion.style";
 
 type EmojiInputProps = {

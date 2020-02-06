@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EmojiInput } from "features/emoji/EmojiInput/EmojiInput";
 import { EmojiSuggestion } from "features/emoji/EmojiSuggestion/EmojiSuggestion";
-import { Wrapper, Container, TextArea } from "./MessageInput.style";
+import { Container, TextArea, Wrapper } from "./MessageInput.style";
 import { sendMessageAction } from "features/messages/sendMessageCommand";
 import {
-  getCurrentConversationId,
-  getConversationMessageInputValue
+  getConversationMessageInputValue,
+  getCurrentConversationId
 } from "../currentConversationModel";
 import { updateConversationMessageInputValueAction } from "features/currentConversation/currentConversationModel";
 import ReactFlagsSelect from "react-flags-select";

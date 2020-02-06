@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import ReduxThunk from "redux-thunk";
 import rootReducer from "./rootReducer";
 import { AppStore, AppThunkContext } from "./storeTypes";

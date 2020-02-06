@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  Wrapper,
   Body,
   ConversationIcon,
-  Name,
+  IconWrapper,
   MessageCount,
-  IconWrapper
+  Name,
+  Wrapper
 } from "./ConversationItem.style";
 import { Leave } from "foundations/components/icons/Leave";
 import useHover from "foundations/hooks/useHover";

@@ -1,8 +1,10 @@
+import { checkAndCreateFunctions } from "./createFunctions";
+
 const PubNub = require('pubnub');
-const data = require('./input_data.json'); 
+const data = require('./input_data.json');
 const _cliProgress = require('cli-progress');
 const readline = require("readline");
-const fs = require('file-system');
+const fs = require('file-system').fs;
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -21,14 +23,13 @@ const CONFIG_FILE = 'src/config/pubnub-keys.json';
 try {
     const rawdata = fs.readFileSync(CONFIG_FILE);
     keys = JSON.parse(rawdata);
-    if(keys && keys.publishKey.length && keys.subscribeKey.length) {
+    if (keys && keys.publishKey.length && keys.subscribeKey.length) {
         console.log(`Keys detected in ${CONFIG_FILE}.`);
         if (process.argv[2] === '--quick-test') {
             process.exit(0);
         }
         scriptStart(keys.publishKey, keys.subscribeKey);
-    }
-    else addKeysAndStartScript(); //in case of empty pub&sub values
+    } else addKeysAndStartScript(); //in case of empty pub&sub values
 } catch (e) {
     addKeysAndStartScript(); //in case of non-xisting keys file
 }
@@ -45,29 +46,59 @@ function addKeysAndStartScript() {
                 const updateKeys = {
                     "publishKey": publishKey,
                     "subscribeKey": subscribeKey
-                }
-                if(!keys) {
-                    fs.openSync(CONFIG_FILE, 'a'); 
-                    console.log(`\n${CONFIG_FILE} file for storing your publish and subscribe key is created.`)
+                };
+                if (!keys) {
+                    fs.openSync(CONFIG_FILE, 'a');
+                    console.log(`\n${CONFIG_FILE} file for storing your publish and subscribe key is created.`);
                 }
                 fs.writeFile(CONFIG_FILE, JSON.stringify(updateKeys), (err) => {
-                    if (!err) console.log( `\nYour keys have been saved to ${CONFIG_FILE} file.`);
+                    if (!err) console.log(`\nYour keys have been saved to ${CONFIG_FILE} file.`);
+                    configurePubNubFunctionsExist(publishKey, subscribeKey);
                     scriptStart(publishKey, subscribeKey);
                 });
-            } 
-            else {
+            } else {
                 console.log('\nYou entered invalid keys format!');
                 process.exit(1);
             }
-        })
-    })
+        });
+    });
 }
 
-async function scriptStart (publishKey, subscribeKey) {
+function configurePubNubFunctionsExist(publishKey, subscribeKey) {
+    console.log('\n***  PubNub Functions required. ***');
+    console.log('\nA specific set of PubNub functions PubNub are required for this application to work.');
+    console.log('These can be created automatically but you will need to enter your PubNub account email, password and key id for the key set added previously.');
+    console.log('Please also note that if the account used SSO to register with PubNub this process will not ne possible.');
+    console.log('\n');
+    console.log('\n*** An AWS account is required. ***');
+    console.log('\nFollow the instructions below to get your AWS access keys:');
+    console.log('\n     https://aws.amazon.com/translate/');
+    console.log('\nCopy and paste an AWS Access Key ID and Secret Access Key when prompted.');
+    rl.question("\nWould you like to automatically create the required PubNub Functions? (y/n): ", continueResponse => {
+        if (continueResponse !== "y") {
+            return;
+        }
+        rl.question("\nPlease enter your PubNub account email: ", email => {
+            rl.question("\nPlease enter your PubNub account password: ", password => {
+                rl.question("\nPlease enter your AWS Access Key ID: ", accessKey => {
+                    rl.question("\nPlease enter your AWS Secret Access Key: ", secretKey => {
+                        const vaultSecrets = {
+                            "AWS_access_key": accessKey,
+                            "AWS_secret_key": secretKey
+                        };
+                        checkAndCreateFunctions(email, password, publishKey, subscribeKey, vaultSecrets);
+                    });
+                });
+            });
+        });
+    });
+}
+
+async function scriptStart(publishKey, subscribeKey) {
     let pubnub = new PubNub({
         subscribeKey: `${subscribeKey}`,
         publishKey: `${publishKey}`
-    });     
+    });
     let numberOfUsers = data.users.length;
     let numberOfSpaces = data.spaces.length;
     const usersCreatedBar = new _cliProgress.SingleBar({}, _cliProgress.Presets.shades_classic);
@@ -86,35 +117,32 @@ async function scriptStart (publishKey, subscribeKey) {
                         name: item.name,
                         profileUrl: item.profileUrl,
                         custom: item.custom
-                    },  status => { 
+                    }, status => {
                         if (!status.error) {
-                            resolve()  
-                        }
-                        else {
+                            resolve();
+                        } else {
                             if (status.statusCode === 409) { //skip duplicate users ie that already exists
                                 resolve();
-                            } 
-                            else if (status.statusCode === 403) { //objects are not enabled for the subscribe key
+                            } else if (status.statusCode === 403) { //objects are not enabled for the subscribe key
                                 console.log(`\n${status.errorData.error.message}`);
                                 console.log('Please enable objects in your PubNub dashboard to proceed.');
                                 process.exit(1);
-                            }
-                            else {
+                            } else {
                                 console.log(`\ncreateUser ${item.id} error:`, status.errorData ? (
-                                    console.log('\nSubscribe key that you entered is invalid!'), 
-                                    //reset keys in case of invalid format
-                                    fs.writeFile(CONFIG_FILE, JSON.stringify({"publishKey": "", "subscribeKey": ""}), () => {  
-                                        process.exit(1)  //Early exit
-                                    })
+                                    console.log('\nSubscribe key that you entered is invalid!'),
+                                        //reset keys in case of invalid format
+                                        fs.writeFile(CONFIG_FILE, JSON.stringify({ "publishKey": "", "subscribeKey": "" }), () => {
+                                            process.exit(1);  //Early exit
+                                        })
                                 ) : status.message);
-                                reject()
+                                reject();
                             }
                         }
-                    })
-                }, 150*(index + 1));
+                    });
+                }, 150 * (index + 1));
             }));
         });
-    }
+    };
 
     const createSpaces = () => {
         console.log('\nCreating spaces:');
@@ -122,29 +150,27 @@ async function scriptStart (publishKey, subscribeKey) {
         data.spaces.forEach((item, index) => {
             createdSpaces.push(new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    spacesCreatedBar.increment()
+                    spacesCreatedBar.increment();
                     pubnub.createSpace({
                         id: item.id,
                         name: item.name,
                         description: item.description
-                    },  status => {
+                    }, status => {
                         if (!status.error) {
                             resolve();
-                        }   
-                        else {
+                        } else {
                             if (status.statusCode === 409) { //skip duplicate spaces ie that already exists
                                 resolve();
-                            }
-                            else {
+                            } else {
                                 console.log(`\ncreateSpace ${item.id} error:`, status.errorData ? status.errorData : status.message);
                                 reject();
                             }
                         }
-                    })
-                }, 100*(index + 1));
+                    });
+                }, 100 * (index + 1));
             }));
         });
-    }
+    };
 
     const createMemberships = () => {
         console.log('\nCreating memberships:');
@@ -153,83 +179,80 @@ async function scriptStart (publishKey, subscribeKey) {
             createdMemberships.push(new Promise((resolve, reject) => {
                 setTimeout(() => {
                     membershipsCreatedBar.increment();
-                    if(data.members[index].members.length > membersPerRequest) {
+                    if (data.members[index].members.length > membersPerRequest) {
                         let leftMembersToAdd = data.members[index].members.length;
                         let devideMembersArray = [];
                         while (leftMembersToAdd > 0) {
                             let sliceMembersStart = leftMembersToAdd - membersPerRequest > 0 ? leftMembersToAdd - membersPerRequest : 0;
-                            devideMembersArray.push(data.members[index].members.slice(sliceMembersStart, leftMembersToAdd))
+                            devideMembersArray.push(data.members[index].members.slice(sliceMembersStart, leftMembersToAdd));
                             leftMembersToAdd = leftMembersToAdd - membersPerRequest;
                         }
                         for (let members of devideMembersArray) {
                             addMembers(item, members, resolve, reject);
                         }
-                    }
-                    else addMembers(item, data.members[index].members, resolve, reject);
-                }, 100*(index + 1));
+                    } else addMembers(item, data.members[index].members, resolve, reject);
+                }, 100 * (index + 1));
             }));
         });
 
-        function addMembers (item, membersToAdd, resolve, reject) {
+        function addMembers(item, membersToAdd, resolve, reject) {
             pubnub.addMembers({
                 spaceId: item.space,
                 users: membersToAdd.map(member => ({ id: member }))
-            },  status => {
-                if(!status.error) {
-                    resolve()  
-                }
-                else if (status.statusCode === 400){
-                    if(status.errorData.error.details[0].message === 'User with specified id is already a member.')
+            }, status => {
+                if (!status.error) {
+                    resolve();
+                } else if (status.statusCode === 400) {
+                    if (status.errorData.error.details[0].message === 'User with specified id is already a member.')
                         resolve();
                     else {
                         console.log('\naddMembers error:', status.errorData.error.details[0].message);
                         reject();
                     }
-                }
-                else {
+                } else {
                     console.log('\naddMembers error:', status.errorData);
                     reject();
                 }
-            })
+            });
         }
-    }
+    };
 
     createUsers();
     let values = await Promise.all(createdUsers.map(p => p.then(
-        () => ({status: "fulfilled" }),
-        () => ({status: "rejected" })
+        () => ({ status: "fulfilled" }),
+        () => ({ status: "rejected" })
     )));
     createdUsers = values.filter(value => value.status === 'fulfilled');
     userCreationErrors = values.filter(value => value.status === 'rejected');
     createSpaces();
     values = await Promise.all(createdSpaces.map(p => p.then(
-        () => ({status: "fulfilled" }),
-        () => ({status: "rejected" })
+        () => ({ status: "fulfilled" }),
+        () => ({ status: "rejected" })
     )));
     createdSpaces = values.filter(value => value.status === 'fulfilled');
     spacesCreationErrors = values.filter(value => value.status === 'rejected');
     if (createdUsers.length > 0 && createdSpaces.length > 0) { //Do not make memberships calls if there are no users or spaces
         createMemberships();
         values = await Promise.all(createdMemberships.map(p => p.then(
-            () => ({status: "fulfilled" }),
-            () => ({status: "rejected" })
+            () => ({ status: "fulfilled" }),
+            () => ({ status: "rejected" })
         )));
         createdMemberships = values.filter(value => value.status === 'fulfilled');
         membershipsCreationErrors = values.filter(value => value.status === 'rejected');
     }
-    rl.close(); 
+    rl.close();
 }
 
 rl.on("close", () => {
-    userCreationErrors.length ? 
+    userCreationErrors.length ?
         console.log(`\n\n${createdUsers.length} out of ${data.users.length} users created.`) :
         console.log(`\n\n${createdUsers.length} new users created.`);
-    spacesCreationErrors.length ? 
+    spacesCreationErrors.length ?
         console.log(`${createdSpaces.length} out of ${data.spaces.length} spaces created.`) :
         console.log(`${createdSpaces.length} new spaces created.`);
-    membershipsCreationErrors.length ? 
+    membershipsCreationErrors.length ?
         console.log(`${createdMemberships.length} out of ${data.spaces.length} memberships created.`) :
         console.log(`${createdMemberships.length} new memberships created.`);
-        console.log(`\nYour data has been loaded successfully!`);
-        process.exit(0);
+    console.log(`\nYour data has been loaded successfully!`);
+    process.exit(0);
 });

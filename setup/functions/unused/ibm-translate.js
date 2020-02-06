@@ -24,17 +24,17 @@ export default (request) => {
         var inputText = "";
 
         // Verify the message contains text to translate
-        if(request.message.content && request.message.content.type && request.message.content.type === "text" && request.message.content.body) {
+        if (request.message.content && request.message.content.type && request.message.content.type === "text" && request.message.content.body) {
             inputText = request.message.content.body;
         }
 
         // Verify the message has been prepended with a translation model
         if (inputText.length > 7 && inputText[0] === '[' && inputText[3] === '-' && inputText[6] === ']') {
             // language to translate from
-            var inLang = inputText.substring(1,3).toLowerCase();
+            var inLang = inputText.substring(1, 3).toLowerCase();
 
             // language to translate to
-            var outLang = inputText.substring(4,6).toLowerCase();
+            var outLang = inputText.substring(4, 6).toLowerCase();
 
             inputText = inputText.substring(7);
 

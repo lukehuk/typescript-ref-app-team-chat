@@ -17,7 +17,6 @@ import "./flagsselect.css";
 const translateEnabled = true;
 
 const emptyMessage = "";
-const emptyTranslationModel = "";
 
 const autoExpand = (el: HTMLTextAreaElement) => {
   setTimeout(function() {
@@ -37,7 +36,7 @@ type TranslationFragment<translationModel = string> = [
 const MessageInput = () => {
   const [message, setMessage]: MessageFragment = useState(emptyMessage);
   const [translationModel, setTranslationModel]: TranslationFragment = useState(
-    emptyTranslationModel
+    "en"
   );
   const conversationId: string = useSelector(getCurrentConversationId);
   const textareaRef = useRef<HTMLTextAreaElement>(
@@ -68,7 +67,18 @@ const MessageInput = () => {
     dispatch(
       sendMessageAction({
         type: "text",
-        body: cleanMessage(translationModel + message)
+        content: cleanMessage(message),
+        googleLanguageTranslationV2: {
+          language: translationModel
+        },
+        googleNaturalLanguageV1: {
+          model: "annotateText",
+          type: "PLAIN_TEXT",
+          language: translationModel,
+          encodingType: "UTF8",
+          extractEntities: true,
+          extractDocumentSentiment: true
+        }
       })
     );
     dispatch(
@@ -106,13 +116,13 @@ const MessageInput = () => {
           selectedSize={14}
           optionsSize={30}
           showSelectedLabel={false}
-          defaultCountry={translateEnabled ? undefined : "GB"}
+          defaultCountry={"GB"}
           disabled={!translateEnabled}
           onSelect={countryCode => {
             if (countryCode === "GB") {
-              setTranslationModel("");
+              setTranslationModel("en");
             } else {
-              setTranslationModel("[EN-" + countryCode + "]");
+              setTranslationModel(countryCode.toLowerCase());
             }
           }}
         />

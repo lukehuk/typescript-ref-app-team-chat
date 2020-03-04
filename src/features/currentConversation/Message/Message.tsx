@@ -18,9 +18,9 @@ export interface MessageFragment {
   };
   timetoken: string;
   message: {
-    content: {
-      body: string;
-    };
+    type: string;
+    content: string;
+    [x: string]: any;
   };
 }
 
@@ -38,6 +38,23 @@ const Message = ({ message, avatar }: MessageProps) => {
   }
   */
 
+  function getNaturalLanguageOutput(message: MessageFragment) {
+    if (
+      message.message.googleNaturalLanguageV1 &&
+      message.message.googleNaturalLanguageV1.output
+    ) {
+      return message.message.googleNaturalLanguageV1.output;
+    }
+  }
+
+  function getTitle(message: MessageFragment) {
+    const naturalLanguageOutput = getNaturalLanguageOutput(message);
+    if (naturalLanguageOutput) {
+      return JSON.stringify(naturalLanguageOutput);
+    }
+    return "";
+  }
+
   return (
     <Wrapper>
       <Avatar>
@@ -46,8 +63,8 @@ const Message = ({ message, avatar }: MessageProps) => {
         ) : (
           <UserInitialsAvatar
             size={36}
-            name={message.sender.name}
-            uuid={message.sender.id}
+            name={(message.sender && message.sender.name) || "NA"}
+            uuid={(message.sender && message.sender.id) || "NA"}
           />
         )}
       </Avatar>
@@ -56,7 +73,7 @@ const Message = ({ message, avatar }: MessageProps) => {
           <SenderName>{message.sender.name}</SenderName>
           <TimeSent>{convertTimestampToTime(message.timetoken)}</TimeSent>
         </Header>
-        <Content>{message.message.content.body}</Content>
+        <Content title={getTitle(message)}>{message.message.content}</Content>
       </Body>
     </Wrapper>
   );

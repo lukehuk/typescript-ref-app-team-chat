@@ -119,7 +119,7 @@ class ColorPicker extends React.Component<IProps, IState> {
     } as React.CSSProperties;
 
     const popoverStyle = {
-      position: "absolute",
+      // position: "absolute",
       zIndex: 2
     } as React.CSSProperties;
 

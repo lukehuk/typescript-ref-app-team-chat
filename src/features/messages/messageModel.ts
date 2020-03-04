@@ -4,12 +4,14 @@ import { createMessageReducer, Message as PubNubMessage } from "pubnub-redux";
 
 export interface MessageContent {
   type: string;
-  body: string;
+  content: string;
+  [x: string]: any;
 }
 
 export interface MessageBody {
   sender: string;
-  content: MessageContent;
+  type: string;
+  content: string;
 }
 
 export type Message = Required<

@@ -9,10 +9,9 @@ const welcomeMessage = {
   },
   timetoken: "15735897955841496",
   message: {
-    content: {
-      body:
-        "Welcome to Team Chat. 👋👋 Send a message now to start interacting with other users in the app. ⬇️"
-    }
+    type: "text",
+    content:
+      "Welcome to Team Chat. 👋👋 Send a message now to start interacting with other users in the app. ⬇️"
   }
 };
 

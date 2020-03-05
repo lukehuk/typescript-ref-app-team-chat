@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EmojiInput } from "features/emoji/EmojiInput/EmojiInput";
 import { EmojiSuggestion } from "features/emoji/EmojiSuggestion/EmojiSuggestion";
-import { Container, TextArea, Wrapper } from "./MessageInput.style";
+import { Container, TextArea, Wrapper, Label } from "./MessageInput.style";
 import { sendMessageAction } from "features/messages/sendMessageCommand";
 import {
   getConversationMessageInputValue,
@@ -109,6 +109,7 @@ const MessageInput = () => {
           onKeyPress={handleKeyPress}
           placeholder="Type Message"
         />
+        <Label>To:</Label>
         <ReactFlagsSelect
           countries={["GB", "FR", "ES", "DE", "IT"]}
           placeholder="Translate"

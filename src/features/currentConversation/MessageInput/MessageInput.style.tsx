@@ -20,6 +20,7 @@ export const Container = styled.div`
 `;
 
 export const TextArea = styled.textarea`
+  padding-right: 50px;
   flex-grow: 1;
   border: none;
   resize: none;
@@ -52,4 +53,14 @@ export const Picker = styled.span`
 export const SendButton = styled.div`
   margin-left: 12px;
   cursor: pointer;
+`;
+
+export const Label = styled.label`
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #9b9b9b;
+  position: absolute;
+  bottom: 11px;
+  right: 80px;
 `;

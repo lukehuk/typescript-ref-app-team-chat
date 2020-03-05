@@ -23,6 +23,7 @@ interface PanelStates {
   Right: boolean;
   Overlay: boolean;
   ThemeOverlay: boolean;
+  MessageDetailsOverlay: boolean;
   Content: boolean;
   Top: boolean;
 }
@@ -32,12 +33,13 @@ export const getPanelStates = createSelector(
   (
     layout: ReturnType<typeof getLayout>,
     breakpoint: ReturnType<typeof getBreakpoint>
-  ) => {
+  ): PanelStates => {
     return {
       Left: layout === Layout.Left || breakpoint !== Breakpoint.Small,
       Right: layout === Layout.Right,
       Overlay: layout === Layout.Overlay,
       ThemeOverlay: layout === Layout.ThemeOverlay,
+      MessageDetailsOverlay: layout === Layout.MessageDetailsOverlay,
       Content:
         breakpoint !== Breakpoint.Small ? true : layout === Layout.Default,
       Top: true

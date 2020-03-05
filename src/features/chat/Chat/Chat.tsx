@@ -5,6 +5,7 @@ import { CurrentConversation } from "features/currentConversation/CurrentConvers
 import { ConversationMembers } from "features/conversationMembers/ConversationMembers/ConversationMembers";
 import { JoinConversationModal } from "features/joinedConversations/JoinConversationModal/JoinConversationModal";
 import { ChangeThemeModal } from "features/theme/ChangeThemeModal";
+import { MessageDetailsModal } from "../../messageDetails/MessageDetailsModal";
 
 const ChatUI = () => {
   return (
@@ -14,6 +15,7 @@ const ChatUI = () => {
       <ConversationMembers />
       <JoinConversationModal />
       <ChangeThemeModal />
+      <MessageDetailsModal />
     </Wrapper>
   );
 };

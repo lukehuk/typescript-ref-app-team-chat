@@ -10,6 +10,7 @@ import {
   logingInAction,
   loginSucceededAction
 } from "features/authentication/authenticationModel";
+import { setSelectedMessageAction } from "../features/messageDetails/selectedMessageModel";
 
 /**
  * AppActions is the union of all basic actions in this application.
@@ -25,6 +26,7 @@ export type AppActions =
   | focusOnConversationAction
   | setLayoutAction
   | setBreakpointAction
+  | setSelectedMessageAction
   | logingInAction
   | loginSucceededAction
   | updateConversationMessageInputValueAction;

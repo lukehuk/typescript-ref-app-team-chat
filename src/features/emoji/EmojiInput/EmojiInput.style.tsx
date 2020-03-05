@@ -9,4 +9,5 @@ export const Dialog = styled.div`
 export const EmojiButton = styled.span`
   cursor: pointer;
   padding: 5px;
+  margin-left: 65px;
 `;

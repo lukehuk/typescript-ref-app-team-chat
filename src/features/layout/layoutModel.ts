@@ -11,7 +11,8 @@ export enum Layout {
   Default,
   Right,
   Overlay,
-  ThemeOverlay
+  ThemeOverlay,
+  MessageDetailsOverlay
 }
 
 export const SET_LAYOUT = "SET_LAYOUT";

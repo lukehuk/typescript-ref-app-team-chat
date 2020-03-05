@@ -10,6 +10,9 @@ import {
   TimeSent,
   Wrapper
 } from "./Message.style";
+import { useDispatch } from "react-redux";
+import { setLayoutMessageDetailsOverlay } from "../../layout/actions";
+import { setSelectedMessage } from "../../messageDetails/selectedMessageModel";
 
 export interface MessageFragment {
   sender: {
@@ -37,23 +40,11 @@ const Message = ({ message, avatar }: MessageProps) => {
     return null;
   }
   */
-
-  function getNaturalLanguageOutput(message: MessageFragment) {
-    if (
-      message.message.googleNaturalLanguageV1 &&
-      message.message.googleNaturalLanguageV1.output
-    ) {
-      return message.message.googleNaturalLanguageV1.output;
-    }
-  }
-
-  function getTitle(message: MessageFragment) {
-    const naturalLanguageOutput = getNaturalLanguageOutput(message);
-    if (naturalLanguageOutput) {
-      return JSON.stringify(naturalLanguageOutput);
-    }
-    return "";
-  }
+  const dispatch = useDispatch();
+  const openMessageDetailsOverlay = (message: MessageFragment) => {
+    dispatch(setSelectedMessage(message));
+    dispatch(setLayoutMessageDetailsOverlay());
+  };
 
   return (
     <Wrapper>
@@ -63,8 +54,8 @@ const Message = ({ message, avatar }: MessageProps) => {
         ) : (
           <UserInitialsAvatar
             size={36}
-            name={(message.sender && message.sender.name) || "NA"}
-            uuid={(message.sender && message.sender.id) || "NA"}
+            name={message.sender.name}
+            uuid={message.sender.id}
           />
         )}
       </Avatar>
@@ -73,7 +64,12 @@ const Message = ({ message, avatar }: MessageProps) => {
           <SenderName>{message.sender.name}</SenderName>
           <TimeSent>{convertTimestampToTime(message.timetoken)}</TimeSent>
         </Header>
-        <Content title={getTitle(message)}>{message.message.content}</Content>
+        <Content
+          title="Click for more information!"
+          onClick={() => openMessageDetailsOverlay(message)}
+        >
+          {message.message.content}
+        </Content>
       </Body>
     </Wrapper>
   );

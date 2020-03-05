@@ -19,6 +19,10 @@ export function setLayoutThemeOverlay() {
   return setLayout(Layout.ThemeOverlay);
 }
 
+export function setLayoutMessageDetailsOverlay() {
+  return setLayout(Layout.MessageDetailsOverlay);
+}
+
 export function setLayoutRight() {
   return setLayout(Layout.Right);
 }

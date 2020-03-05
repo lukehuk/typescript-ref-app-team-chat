@@ -10,12 +10,14 @@ import { JoinedConversationsStateReducer } from "features/joinedConversations/jo
 import { ConversationMembersStateReducer } from "features/conversationMembers/conversationMemberModel";
 import { NetworkStatusReducer } from "features/currentUser/networkStatusModel";
 import { MemberPresenceReducer } from "features/memberPresence/memberPresenceModel";
+import { SelectedMessageStateReducer } from "../features/messageDetails/selectedMessageModel";
 
 /**
  * Combine all of the reducers in this application
  */
 const rootReducer = combineReducers({
   layout: LayoutStateReducer,
+  selectedMessage: SelectedMessageStateReducer,
   networkStatus: NetworkStatusReducer,
   users: UsersReducer,
   conversations: conversationStateReducer,

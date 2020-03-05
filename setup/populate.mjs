@@ -1,10 +1,9 @@
-import { checkAndCreateFunctions } from "./createFunctions";
+import { checkAndCreateFunctions } from "./functionCreator.mjs";
+import fs from "file-system";
+import PubNub from "pubnub";
+import _cliProgress from "cli-progress";
+import readline from "readline";
 
-const PubNub = require('pubnub');
-const data = require('./input_data.json');
-const _cliProgress = require('cli-progress');
-const readline = require("readline");
-const fs = require('file-system').fs;
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -19,8 +18,12 @@ let keys;
 let membersPerRequest = 20;
 
 const CONFIG_FILE = 'src/config/pubnub-keys.json';
+const INPUT_DATA_FILE = "setup/input_data.json";
+let data;
 
 try {
+    data = fs.readFileSync(INPUT_DATA_FILE);
+    data = JSON.parse(data);
     const rawdata = fs.readFileSync(CONFIG_FILE);
     keys = JSON.parse(rawdata);
     if (keys && keys.publishKey.length && keys.subscribeKey.length) {
@@ -53,8 +56,10 @@ function addKeysAndStartScript() {
                 }
                 fs.writeFile(CONFIG_FILE, JSON.stringify(updateKeys), (err) => {
                     if (!err) console.log(`\nYour keys have been saved to ${CONFIG_FILE} file.`);
-                    configurePubNubFunctionsExist(publishKey, subscribeKey);
-                    scriptStart(publishKey, subscribeKey);
+                    console.log("Assuming keyset already has the functions required...")
+                    // configurePubNubFunctionsExist(publishKey, subscribeKey).then(() => {
+                    //     scriptStart(publishKey, subscribeKey);
+                    // });
                 });
             } else {
                 console.log('\nYou entered invalid keys format!');
@@ -74,21 +79,17 @@ function configurePubNubFunctionsExist(publishKey, subscribeKey) {
     console.log('\nFollow the instructions below to get your AWS access keys:');
     console.log('\n     https://aws.amazon.com/translate/');
     console.log('\nCopy and paste an AWS Access Key ID and Secret Access Key when prompted.');
-    rl.question("\nWould you like to automatically create the required PubNub Functions? (y/n): ", continueResponse => {
-        if (continueResponse !== "y") {
-            return;
-        }
-        rl.question("\nPlease enter your PubNub account email: ", email => {
-            rl.question("\nPlease enter your PubNub account password: ", password => {
-                rl.question("\nPlease enter your AWS Access Key ID: ", accessKey => {
-                    rl.question("\nPlease enter your AWS Secret Access Key: ", secretKey => {
-                        const vaultSecrets = {
-                            "AWS_access_key": accessKey,
-                            "AWS_secret_key": secretKey
-                        };
-                        checkAndCreateFunctions(email, password, publishKey, subscribeKey, vaultSecrets);
-                    });
-                });
+    rl.question("\nPlease enter your PubNub account email: ", email => {
+        rl.question("\nPlease enter your PubNub account password: ", password => {
+            rl.question("\nPlease enter your Google Cloud API key: ", apiKey => {
+                const vaultSecrets = {
+                    google: {
+                        v1: {
+                            GOOGLE_API_KEY: apiKey
+                        }
+                    }
+                };
+                checkAndCreateFunctions(email, password, subscribeKey, vaultSecrets);
             });
         });
     });

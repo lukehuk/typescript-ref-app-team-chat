@@ -31,10 +31,10 @@
     "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
-    "start": "node setup/populate.js --quick-test && react-scripts start",
-    "build": "node setup/populate.js --quick-test && react-scripts build",
-    "test": "node setup/populate.js --quick-test && react-scripts test",
-    "setup": "node setup/populate.js"
+    "start": "node setup/populate.mjs --quick-test && react-scripts start",
+    "build": "node setup/populate.mjs --quick-test && react-scripts build",
+    "test": "node setup/populate.mjs --quick-test && react-scripts test",
+    "setup": "node setup/populate.mjs"
   },
   "eslintConfig": {
     "extends": "react-app"
